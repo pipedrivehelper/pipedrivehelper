@@ -20,7 +20,7 @@
   var PipedriveHelper = function PipedriveHelper() {
     
     var self = this;
-    window.tabs = [];
+    tabs = [];
     
     var urlRegex = /https:\/\/app.pipedrive.com/;
     var startPage = 'https://app.pipedrive.com';
@@ -86,7 +86,8 @@
         });
         
         // navigate to the desired location
-        var url = self.baseUrl + request.action;
+        console.log(baseUrl);
+        var url = baseUrl + request.action;
         self.navigateTo(url);
       }
       
@@ -134,16 +135,6 @@
         url: url
       })
     };
-    
-    self.deduplicate = function(a) {
-      var n = 0, r = [];
-      for (var i = 0; i < a.length; i++)
-        n[a[i]] = true;
-      for (var k in t)
-        r.push(k);
-    
-      return r;
-    }
     
   }
   

@@ -1,4 +1,4 @@
-$(function(w){
+$(function(w, d){
   
   // receives message from background script
   chrome.extension.onMessage.addListener(function(message, sender) {
@@ -50,7 +50,7 @@ $(function(w){
       if (e.keyCode == 191 && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
         // pressed forward slash for search – /
         e.preventDefault();
-        document.getElementsByName("needle")[0].focus();
+        d.getElementsByName("needle")[0].focus();
         return;
       }
     
@@ -66,7 +66,7 @@ $(function(w){
   // Pipedrive uses a lot of dynamically loaded elements.  We'll need to get tricky
   // to grab DOM elements when they are actually available.
   var loaded = false;
-  $(document).bind("DOMSubtreeModified", function() {
+  $(d).bind("DOMSubtreeModified", function() {
     // is the menu loaded yet?
     var active = $("li.key-activities a span.count").text();
     
@@ -77,4 +77,4 @@ $(function(w){
     });
   });
 
-}(window));
+}(window, document));
