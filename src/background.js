@@ -13,6 +13,18 @@
   });
 })();*/
 
+
+// TODO:
+//    Cleanup code and refactor
+//    Add Alt+H combo with help dialog
+//    Add custom urls (Alt+1, Alt+2, etc.)
+//    Add settings page to manage features
+//    Add option to choose badget text (new mail, activites, etc.)
+
+chrome.commands.getAll(function(commands) {
+  console.debug(commands);
+});
+
 (function(w) {
   // Idea based loosely on Lee Turner's GreaseMonkey script for Firefox
   // http://blog.pipedrive.com/2015/01/pipedrive-users-tricks-and-hacks/
@@ -117,7 +129,7 @@
         
         case "launch-in-current-tab":
           console.log('Do launch-in-current-tab');
-          self.navigateTo(self.startPage);
+          self.navigateTo(startPage);
           break;
           
         default:

@@ -16,21 +16,16 @@
   },
   "commands": {
     "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
       "description": "Launch Pipedrive in new tab"
     },
     "launch-in-current-tab": {
       "suggested_key": {
-        "default": "Alt+P",
-        "mac": "Alt+Shift+P"
+        "default": "Alt+P"
       },
       "description": "Launch Pipedrive in active tab"
-    },
-    "_execute_page_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+E",
-        "windows": "Alt+Shift+P",
-        "mac": "Alt+Shift+P"
-      }
     }
   },
   "content_scripts": [
