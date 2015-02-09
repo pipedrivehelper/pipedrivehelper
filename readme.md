@@ -1,20 +1,13 @@
-# **Example Chrome Extension**
+# **Pipedrive-Helper Chrome Extension**
 
-This is a blank template Chrome extension with a basic event/message passing skeleton for you to easily get started building a Chrome extension.
+This Chrome extension adds a few handy keyboard shortcuts while using Pipedrive CRM.
 
-I've also included Mixpanel for tracking, just drop an API key associated with your project into the `mixpanel.js` file.
+### Thanks
 
-### MVC
-- Popup script (view)
-- Content script (controller)
-- Background script (model)
-
-### Purpose
-
-I wanted to create this for myself, as a start place for future extensions, but figured it might help you out as well. I hope it does.
+Inspiration taken from [Lee Turner's GreaseMonkey script for Firefox](http://blog.pipedrive.com/2015/01/pipedrive-users-tricks-and-hacks/).
 
 ### Contributing
 
-Feel free to clone this repo and submit a pull request to add other basic elements of a useful Chrome extension.
+Feel free to clone this repo and submit a pull request.  Feature suggestions can be requested by opening an Issue.
 
 *Created by [@ZackShapiro](http://twitter.com/zackshapiro) under the MIT License.*
