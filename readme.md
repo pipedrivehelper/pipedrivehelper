@@ -1,6 +1,6 @@
 # **Pipedrive-Helper Chrome Extension**
 
-This Chrome extension adds a few handy keyboard shortcuts while using Pipedrive CRM.
+This Chrome extension adds a few handy keyboard shortcuts while using [Pipedrive CRM](http://www.pipedrive.com).
 
 ### Thanks
 
