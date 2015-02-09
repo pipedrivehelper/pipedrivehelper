@@ -108,10 +108,18 @@ $(function(w, d){
         //TODO: Implement native JS element selector and remove jQuery dependency
         // is the menu loaded yet?
         var active = $("li.key-activities a span.count").text();
+        var flag = $("div#global-notifications.online span.count").text();
+        
         var count = (active.length > 0) ? active : "0";
+        var opts = {activities: count};
+        
+        // always show flags instead if they exist
+        if (flag.length > 0) {
+            opts = {flags: flag}; console.log(flag);
+        }
         
         // notify the background script
-        chrome.runtime.sendMessage({activities: count}, function(response) {
+        chrome.runtime.sendMessage(opts, function(response) {
             console.log("response.message", response.message);
         });
     });

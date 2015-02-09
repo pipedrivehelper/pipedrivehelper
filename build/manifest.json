@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Pipedrive CRM Helper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Adds useful hotkeys to Pipedrive CRM",
   "browser_action": {
     "default_icon": {

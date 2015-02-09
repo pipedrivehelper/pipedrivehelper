@@ -62,6 +62,11 @@
                 if (request.activities !== undefined) {
                     self._updateActivityCount(request);
                 }
+                
+                // handle updates to flags count
+                if (request.flags !== undefined) {
+                    self._updateFlagCount(request);
+                }
             });
             
             // listen for command shortcuts (defined in manifest.json)
@@ -113,7 +118,7 @@
             this._navigate(this._baseUrl + request.action);
             
         },
-            
+        
         _updateActivityCount: function(request) {
             
             // send response to content script
@@ -124,8 +129,28 @@
             });
             
             var color = (request.activities == "0") ? [0, 255, 0, 128] : [255, 0, 0, 128];
+            this._updateBadge(request.activities, color);
+            
+        },
+        
+        _updateFlagCount: function(request) {
+            
+            // send response to content script
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    message: "Flags ("+request.flags+") OK"
+                });
+            });
+            
+            var color = [16, 156, 235, 128];
+            this._updateBadge(request.flags, color);
+            
+        },
+        
+        _updateBadge: function(text, color) {
+            
             chrome.browserAction.setBadgeBackgroundColor({color: color});
-            chrome.browserAction.setBadgeText({text: request.activities});
+            chrome.browserAction.setBadgeText({text: text});
             
         },
         
