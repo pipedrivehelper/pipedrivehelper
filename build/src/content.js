@@ -21,6 +21,7 @@ $(function(w, d){
             // alt-d: goto deals pipeline view
             if (e.keyCode == 68 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
                 page = "pipeline";
+                return;
             }
             
             // alt-l: goto deals list view
@@ -43,25 +44,32 @@ $(function(w, d){
                 page = "activities";
             }
             
-            // alt-p: goto people
-            if (e.keyCode == 80 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
+            // alt-c: goto contacts (people)
+            if (e.keyCode == 67 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
                 page = "people";
             }
             
             // alt-o: goto organizations
             if (e.keyCode == 79 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
-                page = "org"
+                page = "org";
             }
             
             // alt-s: goto statistics
             if (e.keyCode == 83 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
-                page = "company/details"
+                page = "company/details";
             }
             
             // alt-x: goto settings
             if (e.keyCode == 88 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
-                page = "settings"
+                page = "settings";
             }
+            
+            // alt-+: add a new deal
+            /*if (e.keyCode == 107 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey ||
+                e.keyCode == 187 && e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
+                page = "deal/add";
+                //TODO: needs to load page in "#dialog" target
+            }*/
             
             // alt-h: show modal help dialog
             if (e.keyCode == 88 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
@@ -74,7 +82,13 @@ $(function(w, d){
                 d.getElementsByName("needle")[0].focus();
                 return;
             }
-        
+            
+            // TODO: detect and prevent successive alt presses and unlisted combinations
+            if (page === null) {
+                return;
+            }
+            
+            // TODO: move outside function if implemented.
             // sends message to background script with action
             chrome.runtime.sendMessage({action: page}, function(response) {
                 // In production, do nothing

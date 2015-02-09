@@ -52,7 +52,7 @@
             });
             
             // listen for messages from content script
-            chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
+            chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 // handle registered keyboard shorcuts (defined in content script)
                 if (request.action !== undefined) {
                     self._performAction(request);
@@ -135,7 +135,7 @@
                 
                 case "launch-in-current-tab":
                     console.log('Do launch-in-current-tab');
-                    self.navigateTo(startPage);
+                    this.navigate(this._startPage);
                     break;
                     
                 default:
@@ -145,7 +145,7 @@
         
         },
         
-        _navigateTo: function(url, tab) {
+        _navigate: function(url, tab) {
             
             var whichTab = (tab !== undefined) ? tab.id : null;
             // null represents the active tab
