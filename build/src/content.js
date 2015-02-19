@@ -72,12 +72,15 @@ $(function(w, d){
             }*/
             
             // alt-h: show modal help dialog
-            if (e.keyCode == 88 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
+            if (e.keyCode == 72 && !e.shiftKey && !e.ctrlKey && e.altKey && !e.metaKey) {
                 //TODO: implement a modal help dialog with shorcuts
+                d.dispatchEvent(new Event("ph-modal"));
             }
             
             // pressed forward slash for search – /
-            if (e.keyCode == 191 && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+            //if (e.keyCode == 191 && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+            // pressed ` for search
+            if (e.keyCode == 192 && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
                 e.preventDefault();
                 d.getElementsByName("needle")[0].focus();
                 return;
@@ -115,7 +118,7 @@ $(function(w, d){
         
         // always show flags instead if they exist
         if (flag.length > 0) {
-            opts = {flags: flag}; console.log(flag);
+            opts = {flags: flag};
         }
         
         // notify the background script
@@ -123,5 +126,59 @@ $(function(w, d){
             console.log("response.message", response.message);
         });
     });
+    
+    // Inject the dialog into the page
+    $.get(chrome.extension.getURL('/src/dialog.html'), function(data) {
+        var html = parseOSKeys(data);
+        $(html).appendTo('body');
+        // Or if you are using jQuery 1.8+:
+        //$($.parseHTML(data)).appendTo('body');
+    });
+    
+    // Parse OS keys
+    function parseOSKeys(data) {
+        if (w.navigator.platform === "MacIntel") {
+            // Mac keys
+            data = data.replace(/Alt([\s\+])/g, "⌥$1");          // Alt key (Option)
+            data = data.replace(/Ctrl([\s\+])/g, "⌘$1");         // Ctrl key (Command)
+        }
+        data = data.replace(/Shift([\s\+])/g, "⇧$1");            // Shift key (pretty character)
+        data = data.replace(/Tab([\s\+])/g, "⇥$1");              // Tab key (pretty character)
+        data = data.replace(/Esc([\s\+:])/g, "␛$1");             // Esc key (pretty character)
+        data = data.replace(/Caps([\s\+])/g, "⇪$1");             // Caps lock key (pretty character)
+        data = data.replace(/(Back)|(Delete)([\s\+])/g, "⌫$3");  // Backspace/Delete key (pretty character)
+        data = data.replace(/(Enter)|(Return)([\s\+])/g, "⏎$3"); // Enter/Return key (pretty character)
+        
+        return data;
+    }
+    
+    // Set up a handler to listen for modal dialog requests.
+    d.addEventListener('ph-modal', function(e) {
+        var dialog = d.querySelector("#ph-modal");
+        dialog.showModal();
+        dialog.addEventListener('close', function(e) {
+            console.log('dialog closed by', this.returnValue);
+            // create dialog clone without event handlers
+            var clone = this.cloneNode(true);
+            this.parentNode.replaceChild(clone, this);
+        }, false);
+        dialog.addEventListener('cancel', function(e) {
+            // this will bubble to the close event
+            e.stopPropagation();
+            this.close("pressing ESC");
+        }, false);
+        dialog.addEventListener('click', function(e) {
+            if (e.toElement === this) {  // click outside of dialog
+                e.preventDefault();
+                e.stopPropagation();
+                //var closer = document.querySelector('#ph-close');
+                //closer.dispatchEvent(new Event('click'));
+                //closer.click();  // convenience method
+                this.close('clicking outside');
+            }
+        }, false);
+        // allow this to run only once
+        //this.removeEventListener(e.type, arguments.callee, false);
+    }, false);
 
 }(window, document));

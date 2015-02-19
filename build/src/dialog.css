@@ -1,0 +1,164 @@
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,700);
+
+/* General styles for the modal */
+dialog#ph-modal {
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	max-width: 730px;
+	/*min-width: 320px;*/
+	min-width: 710px;
+	/*height: auto;*/
+	height: -webkit-fit-content;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	border-radius: 5px;
+	padding: 0;
+	border: 0;
+	-webkit-box-sizing: border-box;
+}
+
+/* Content styles */
+dialog#ph-modal .ph-content {
+	color: #fff;
+	background: #e74c3c;
+	position: relative;
+	border-radius: 5px;
+	margin: 0 auto;
+	min-width: 710px;
+	-webkit-box-sizing: border-box;
+}
+
+dialog#ph-modal .ph-content h3 {
+	margin: 0;
+	padding: 0.4em;
+	text-align: center;
+	font-size: 2.4em;
+	font-weight: 300;
+	opacity: 0.8;
+	background: rgba(0,0,0,0.1);
+	border-radius: 3px 3px 0 0;
+}
+
+dialog#ph-modal .ph-content > div {
+	padding: 15px 40px 30px;
+	margin: 0;
+	font-weight: 300;
+	font-size: 1.15em;
+	/*min-width: 710px;*/
+	-webkit-box-sizing: border-box;
+}
+
+dialog#ph-modal .ph-content > div p {
+	margin: 0;
+	padding: 10px 0;
+}
+
+dialog#ph-modal .ph-content > div ul {
+	margin: 0;
+	/*padding: 0 0 30px 20px;*/
+	padding: 0 0 15px 0;
+	min-width: 315px;
+	max-width: 50%;
+	float: left;
+}
+
+dialog#ph-modal .ph-content > div ul:first-of-type {
+	min-width: 100%;
+	margin: 0 auto;
+	padding: 0;
+	display: inline-block;
+	text-align: center;
+}
+
+dialog#ph-modal .ph-content > div ul li {
+	padding: 5px 0;
+}
+
+dialog#ph-modal .ph-content > div ul li strong {
+	font-weight: 700;
+	color: #333;
+	width: 60px;
+	display: inline-block;
+}
+
+dialog#ph-modal .ph-content > div ul:first-of-type strong {
+	min-width: 90px;
+}
+
+dialog#ph-modal .ph-content > div ul:nth-of-type(2n+1) {
+	left: 0;
+}
+
+dialog#ph-modal .ph-content > div ul li:nth-of-type(2n) {
+	right: 0;
+}
+
+dialog#ph-modal .ph-content form {
+	display:inline-block;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+}
+
+dialog#ph-modal .ph-content button {
+	border: none;
+	padding: 0.6em 1.2em;
+	background: #c0392b;
+	color: #fff;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 2px;
+	margin: 0 6px;
+	font-size: 0.8em;
+	outline: 0;
+}
+
+dialog#ph-modal .ph-content button:hover {
+	background-color: #a5281b;
+}
+
+dialog#ph-modal .ph-content button:focus {
+	outline: solid thin;
+	outline-radius: 2px;
+}
+
+dialog#ph-modal .ph-content button:only-of-type {
+	outline: 0 !important;
+}
+
+/* Individual modal styles with animations/transitions */
+
+dialog#ph-modal:not[open] .ph-content {
+	-webkit-transform: translateY(-5%);
+	opacity: 0;
+}
+
+dialog#ph-modal[open] .ph-content {
+	-webkit-transform: translateY(0);
+	opacity: 1;
+}
+
+dialog#ph-modal .ph-content {
+	-webkit-transition: all 0.3s;
+}
+
+dialog#ph-modal::backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(143,27,15,0.8);
+	/*-webkit-filter: blur(3px);*/
+	margin: 0;
+	padding: 0;
+}
